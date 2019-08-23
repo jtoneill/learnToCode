@@ -1,47 +1,22 @@
-let seta = [1, 2, [1, 2, 3], 3, 4];
-let setb = [1, 2, [1, 2, 3], 3, 4];
-let keeptrack = [];
-let i = 0;
-let shouldpop = false;
-
+//let seta = [1, 2, [1, 2, 3], 3, 4];
+//let setb = [1, 2, [1, 2, 3], 3, 4];
+let seta = {a: 1, b: 2, c: 3, d: {a: 1, g: 6, hello: 'world'}, food: 'apple'};
+let setb = {a: 1, b: 2, c: 3, d: {a: 1, g: 6, hello: 'world'}, food: 'apple'};
 
 deepequal = (a, b) => {
-    if(typeof a == 'object'){
-        let akeys = Object.keys(a);
-        while(i <= akeys.length){
-            if(shouldpop){
-                //b = keeptrack.pop();
-                
-                //a = keeptrack.pop();
-                i = keeptrack.pop() + 1;
-                //akeys = Object.keys(a);
-                shouldpop = false;
-            }
-            if(typeof a[akeys[i]] == 'object'){
-                keeptrack.push(i);
-                //shouldpop = true;
-                console.log('hey');
-                deepequal(a[akeys[i]], b[akeys[i]]);
-                
-            }
-            if(a[akeys[i]] === b[akeys[i]]){
-                if(i == a.length){
-                    shouldpop = true;
-                    console.log('step back');
-                } else {
-                    i++
-                    console.log('pass');
-                }
-                
-                
-            } else {
-                return console.log('false');
-            }
-        }
-    } else if(a === b){
-        console.log('pass or true');
-    } else {
-        return console.log('false');
+    if (a === b) return true;
+
+    if(typeof a != 'object' || typeof b != 'object' || a == null || b == null) return false;
+
+    let keysa = Object.keys(a);
+    if(keysa.length != Object.keys(b).length) return false;
+    
+    for(let key of keysa){
+        
+        if(!deepequal(a[key], b[key])) return false;
+        console.log(a[key] + ' = ' + b[key]);
     }
+    console.log('pass');
+    return true;
 }
 deepequal(seta, setb);
