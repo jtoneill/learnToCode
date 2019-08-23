@@ -1,3 +1,5 @@
+//This is the books answer. had to peek...
+
 let seta = [1, 2, [1, 2, 3], 3, 4];
 let setb = [1, 2, [1, 2, 3], 3, 4];
 
